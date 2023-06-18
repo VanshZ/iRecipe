@@ -1,63 +1,245 @@
-/* styles.css */
-
-body {
+/* body {
+    background-color: #f0f0f0;
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
   }
   
   h1 {
+    color: #336633;
     text-align: center;
+    margin-top: 20px;
   }
   
-  form {
-    margin-bottom: 20px;
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
   }
   
-  #ingredientList {
+  .column {
+    flex: 1;
+    margin-right: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+  }
+  
+  .column h2 {
+    color: #336633;
     margin-bottom: 10px;
   }
   
-  .ingredientRow {
+  .ingredient-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .ingredient-form label {
+    color: #336633;
+    font-weight: bold;
+    line-height: 30px;
+  }
+  
+  .ingredient-form input[type="text"],
+  .ingredient-form input[type="number"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 200px;
+  }
+  
+  .ingredient-form button {
+    padding: 5px 10px;
+    background-color: #336633;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .ingredient-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .ingredient-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .ingredient-item input[type="number"] {
+    width: 60px;
+  }
+  
+  .grocery-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  
+  .grocery-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .grocery-item input[type="number"] {
+    width: 60px;
+  }
+  
+  .submit-button {
+    margin-top: 10px;
+  }
+  
+  .recipe-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  
+  .recipe-item {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
   }
   
-  .ingredientRow label {
-    width: 100px;
+  .recipe-item img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
   }
   
-  .ingredientRow input[type="text"],
-  .ingredientRow input[type="number"] {
-    margin-left: 10px;
-    padding: 5px;
+  .recipe-item a {
+    color: #336633;
+    text-decoration: none;
+  }
+   */
+
+body {
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
   }
   
-  .removeButton {
-    margin-left: 10px;
+  h1 {
+    color: #336633;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .column {
+    flex: 1;
+    margin-right: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+  }
+  
+  .column h2 {
+    color: #336633;
+    margin-bottom: 10px;
+  }
+  
+  .ingredient-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .ingredient-form label {
+    color: #336633;
+    font-weight: bold;
+    line-height: 30px;
+  }
+  
+  .ingredient-form input[type="text"],
+  .ingredient-form input[type="number"] {
     padding: 5px;
-    background-color: #dc3545;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 200px;
+  }
+  
+  .ingredient-form button {
+    padding: 5px 10px;
+    background-color: #336633;
     color: #fff;
     border: none;
+    border-radius: 3px;
     cursor: pointer;
   }
   
-  button {
-    padding: 10px 15px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
+  .ingredient-list {
+    list-style-type: none;
+    padding: 0;
   }
   
-  #groceryList {
-    list-style: none;
-    padding-left: 0;
-  }
-  
-  #groceryList li {
+  .ingredient-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 5px;
   }
   
+  .ingredient-item input[type="number"] {
+    width: 60px;
+  }
+  
+  .grocery-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  
+  .grocery-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .grocery-item input[type="number"] {
+    width: 60px;
+  }
+  
+  .submit-button {
+    margin-top: 10px;
+  }
+  
+  .recipe-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  
+  .recipe-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .recipe-item img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+  }
+  
+  .recipe-item a {
+    color: #336633;
+    text-decoration: none;
+  }
   

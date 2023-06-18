@@ -3,32 +3,130 @@
 <head>
     <title>Recipe Finder</title>
     <style>
-        .recipe {
-            margin-bottom: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
         }
-        .recipe h3 {
-            margin-top: 0;
+        .column {
+            width: 45%;
         }
-        .recipe p {
-            margin-bottom: 0;
+        .recipe-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .recipe-list-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .recipe-list-item img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+        .grocery-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .grocery-list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .grocery-list-item input {
+            width: 50px;
         }
     </style>
 </head>
 <body>
-    <div>
-        <label for="ingredientsInput">Enter the ingredients you have (separated by commas):</label>
-        <input type="text" id="ingredientsInput">
-        <button onclick="getRecipes()">Search</button>
+    <div class="container">
+        <div class="column">
+            <h2>Ingredients</h2>
+            <div>
+                <label for="ingredientInput">Ingredient:</label>
+                <input type="text" id="ingredientInput">
+                <label for="quantityInput">Quantity:</label>
+                <input type="number" id="quantityInput">
+                <button onclick="addToGroceryList()">Add</button>
+            </div>
+            <button onclick="findRecipes()">Submit</button>
+        </div>
+        <div class="column">
+            <h2>Grocery List</h2>
+            <ul id="groceryList" class="grocery-list"></ul>
+        </div>
     </div>
-    <div id="recipeResults"></div>
+    <h2>Recipes</h2>
+    <ul id="recipeList" class="recipe-list"></ul>
 
     <script>
-        function getRecipes() {
-            var ingredientsInput = document.getElementById("ingredientsInput").value;
-            var encodedIngredients = encodeURIComponent(ingredientsInput);
+        var groceryList = [];
+
+        function addToGroceryList() {
+            var ingredientInput = document.getElementById("ingredientInput").value;
+            var quantityInput = document.getElementById("quantityInput").value;
+            
+            var groceryItem = {
+                ingredient: ingredientInput,
+                quantity: quantityInput
+            };
+
+            groceryList.push(groceryItem);
+
+            updateGroceryList();
+            clearInputs();
+        }
+
+        function updateGroceryList() {
+            var groceryListElement = document.getElementById("groceryList");
+            groceryListElement.innerHTML = "";
+
+            for (var i = 0; i < groceryList.length; i++) {
+                var groceryItem = groceryList[i];
+                var groceryListItem = document.createElement("li");
+                groceryListItem.className = "grocery-list-item";
+
+                var itemText = document.createElement("span");
+                itemText.textContent = groceryItem.ingredient + " - " + groceryItem.quantity;
+
+                var quantityInput = document.createElement("input");
+                quantityInput.type = "number";
+                quantityInput.value = groceryItem.quantity;
+                quantityInput.oninput = function (event) {
+                    var updatedQuantity = event.target.value;
+                    var index = Array.from(groceryListItem.parentNode.children).indexOf(groceryListItem);
+                    groceryList[index].quantity = updatedQuantity;
+                };
+
+                var deleteButton = document.createElement("button");
+                deleteButton.textContent = "Delete";
+                deleteButton.onclick = function () {
+                    var index = Array.from(groceryListItem.parentNode.children).indexOf(groceryListItem);
+                    groceryList.splice(index, 1);
+                    updateGroceryList();
+                };
+
+                groceryListItem.appendChild(itemText);
+                groceryListItem.appendChild(quantityInput);
+                groceryListItem.appendChild(deleteButton);
+
+                groceryListElement.appendChild(groceryListItem);
+            }
+        }
+
+        function clearInputs() {
+            document.getElementById("ingredientInput").value = "";
+            document.getElementById("quantityInput").value = "";
+        }
+
+        function findRecipes() {
+            var ingredients = [];
+            for (var i = 0; i < groceryList.length; i++) {
+                ingredients.push(groceryList[i].ingredient);
+            }
+            var encodedIngredients = encodeURIComponent(ingredients.join(","));
 
             // Make the API request with the encodedIngredients using Ajax or Fetch API
             // Replace the following example code with your actual API request implementation
@@ -41,30 +139,25 @@
         }
 
         function displayRecipes(recipes) {
-            var recipeResultsDiv = document.getElementById("recipeResults");
-
-            recipeResultsDiv.innerHTML = "";
+            var recipeListElement = document.getElementById("recipeList");
+            recipeListElement.innerHTML = "";
 
             for (var i = 0; i < recipes.length; i++) {
                 var recipe = recipes[i].recipe;
-                var recipeDiv = document.createElement("div");
-                recipeDiv.className = "recipe";
-
-                var recipeTitle = document.createElement("h3");
-                recipeTitle.textContent = recipe.label;
+                var recipeListItem = document.createElement("li");
+                recipeListItem.className = "recipe-list-item";
 
                 var recipeImage = document.createElement("img");
                 recipeImage.src = recipe.image;
 
                 var recipeLink = document.createElement("a");
                 recipeLink.href = recipe.url;
-                recipeLink.textContent = "View Recipe";
+                recipeLink.textContent = recipe.label;
 
-                recipeDiv.appendChild(recipeTitle);
-                recipeDiv.appendChild(recipeImage);
-                recipeDiv.appendChild(recipeLink);
+                recipeListItem.appendChild(recipeImage);
+                recipeListItem.appendChild(recipeLink);
 
-                recipeResultsDiv.appendChild(recipeDiv);
+                recipeListElement.appendChild(recipeListItem);
             }
         }
     </script>
