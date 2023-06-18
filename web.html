@@ -1,30 +1,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Recipe Finder</title>
-  <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Recipe Finder</title>
+    <style>
+        .recipe {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .recipe h3 {
+            margin-top: 0;
+        }
+        .recipe p {
+            margin-bottom: 0;
+        }
+    </style>
 </head>
 <body>
-  <h1>iRecipe</h1>
-  
-  <form id="recipeForm">
-    <div id="ingredientList">
-      <div class="ingredientRow">
-        <label for="ingredient1">Ingredient:</label>
-        <input type="text" id="ingredient1" name="ingredients[]" placeholder="Enter ingredient">
-        <label for="quantity1">Quantity:</label>
-        <input type="number" id="quantity1" name="quantities[]" min="1" step="1" value="1">
-        <button type="button" class="removeButton" onclick="removeIngredient(this)">Remove</button>
-      </div>
+    <div>
+        <label for="ingredientsInput">Enter the ingredients you have (separated by commas):</label>
+        <input type="text" id="ingredientsInput">
+        <button onclick="getRecipes()">Search</button>
     </div>
+    <div id="recipeResults"></div>
 
-    <button type="button" onclick="addIngredient()">Add Ingredient</button>
-    <button type="submit">Find Recipes</button>
-  </form>
+    <script>
+        function getRecipes() {
+            var ingredientsInput = document.getElementById("ingredientsInput").value;
+            var encodedIngredients = encodeURIComponent(ingredientsInput);
 
-  <h2>Grocery List</h2>
-  <ul id="groceryList"></ul>
+            // Make the API request with the encodedIngredients using Ajax or Fetch API
+            // Replace the following example code with your actual API request implementation
+            var apiUrl = "https://api.edamam.com/search?q=" + encodedIngredients + "&app_id=12f29b73&app_key=fd2e4bfe519b5dc1eeb1ae301cbfae68";
+            
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => displayRecipes(data.hits))
+                .catch(error => console.error(error));
+        }
 
-  <script src="script.js"></script>
+        function displayRecipes(recipes) {
+            var recipeResultsDiv = document.getElementById("recipeResults");
+
+            recipeResultsDiv.innerHTML = "";
+
+            for (var i = 0; i < recipes.length; i++) {
+                var recipe = recipes[i].recipe;
+                var recipeDiv = document.createElement("div");
+                recipeDiv.className = "recipe";
+
+                var recipeTitle = document.createElement("h3");
+                recipeTitle.textContent = recipe.label;
+
+                var recipeImage = document.createElement("img");
+                recipeImage.src = recipe.image;
+
+                var recipeLink = document.createElement("a");
+                recipeLink.href = recipe.url;
+                recipeLink.textContent = "View Recipe";
+
+                recipeDiv.appendChild(recipeTitle);
+                recipeDiv.appendChild(recipeImage);
+                recipeDiv.appendChild(recipeLink);
+
+                recipeResultsDiv.appendChild(recipeDiv);
+            }
+        }
+    </script>
 </body>
 </html>
