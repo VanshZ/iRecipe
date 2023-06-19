@@ -14,7 +14,9 @@
 </head>
 <h1>iRecipe</h1>
 <body>
+
     <div class="container">
+        
         <div class="column">
             <h2>Ingredients</h2>
             <div>
@@ -30,6 +32,7 @@
             <h2>Grocery List</h2>
             <ul id="groceryList" class="grocery-list"></ul>
         </div>
+        
     </div>
     <h2 id="recipeheader">Recipes</h2>
     <ul id="recipeList" class="recipe-list"></ul>
@@ -78,6 +81,7 @@
                 var deleteButton = document.createElement("button");
                 deleteButton.textContent = "Delete";
                 deleteButton.onclick = function () {
+                    var groceryListItem = this.parentNode;
                     var index = Array.from(groceryListItem.parentNode.children).indexOf(groceryListItem);
                     groceryList.splice(index, 1);
                     updateGroceryList();
