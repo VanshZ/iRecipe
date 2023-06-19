@@ -1,45 +1,18 @@
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <title>Document</title>
+</head>
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Recipe Finder</title>
-    <style>
-        .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
-        .column {
-            width: 45%;
-        }
-        .recipe-list {
-            list-style-type: none;
-            padding: 0;
-        }
-        .recipe-list-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .recipe-list-item img {
-            width: 50px;
-            height: 50px;
-            margin-right: 10px;
-        }
-        .grocery-list {
-            list-style-type: none;
-            padding: 0;
-        }
-        .grocery-list-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .grocery-list-item input {
-            width: 50px;
-        }
-    </style>
+  <title>iRecipe</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
+<h1>iRecipe</h1>
 <body>
     <div class="container">
         <div class="column">
@@ -58,7 +31,7 @@
             <ul id="groceryList" class="grocery-list"></ul>
         </div>
     </div>
-    <h2>Recipes</h2>
+    <h2 id="recipeheader">Recipes</h2>
     <ul id="recipeList" class="recipe-list"></ul>
 
     <script>
@@ -67,7 +40,7 @@
         function addToGroceryList() {
             var ingredientInput = document.getElementById("ingredientInput").value;
             var quantityInput = document.getElementById("quantityInput").value;
-            
+
             var groceryItem = {
                 ingredient: ingredientInput,
                 quantity: quantityInput
@@ -76,6 +49,7 @@
             groceryList.push(groceryItem);
 
             updateGroceryList();
+            saveGroceryList();
             clearInputs();
         }
 
@@ -89,7 +63,7 @@
                 groceryListItem.className = "grocery-list-item";
 
                 var itemText = document.createElement("span");
-                itemText.textContent = groceryItem.ingredient + " - " + groceryItem.quantity;
+                itemText.textContent = groceryItem.ingredient;
 
                 var quantityInput = document.createElement("input");
                 quantityInput.type = "number";
@@ -98,6 +72,7 @@
                     var updatedQuantity = event.target.value;
                     var index = Array.from(groceryListItem.parentNode.children).indexOf(groceryListItem);
                     groceryList[index].quantity = updatedQuantity;
+                    saveGroceryList();
                 };
 
                 var deleteButton = document.createElement("button");
@@ -106,6 +81,7 @@
                     var index = Array.from(groceryListItem.parentNode.children).indexOf(groceryListItem);
                     groceryList.splice(index, 1);
                     updateGroceryList();
+                    saveGroceryList();
                 };
 
                 groceryListItem.appendChild(itemText);
@@ -131,7 +107,7 @@
             // Make the API request with the encodedIngredients using Ajax or Fetch API
             // Replace the following example code with your actual API request implementation
             var apiUrl = "https://api.edamam.com/search?q=" + encodedIngredients + "&app_id=12f29b73&app_key=fd2e4bfe519b5dc1eeb1ae301cbfae68";
-            
+
             fetch(apiUrl)
                 .then(response => response.json())
                 .then(data => displayRecipes(data.hits))
@@ -153,6 +129,7 @@
                 var recipeLink = document.createElement("a");
                 recipeLink.href = recipe.url;
                 recipeLink.textContent = recipe.label;
+                recipeLink.target = "_blank"; // Open the link in a new tab
 
                 recipeListItem.appendChild(recipeImage);
                 recipeListItem.appendChild(recipeLink);

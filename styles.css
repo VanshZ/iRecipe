@@ -1,245 +1,147 @@
-/* body {
-    background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
-  }
-  
-  h1 {
-    color: #336633;
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .column {
-    flex: 1;
-    margin-right: 20px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-  }
-  
-  .column h2 {
-    color: #336633;
-    margin-bottom: 10px;
-  }
-  
-  .ingredient-form {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-  
-  .ingredient-form label {
-    color: #336633;
-    font-weight: bold;
-    line-height: 30px;
-  }
-  
-  .ingredient-form input[type="text"],
-  .ingredient-form input[type="number"] {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    width: 200px;
-  }
-  
-  .ingredient-form button {
-    padding: 5px 10px;
-    background-color: #336633;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-  }
-  
-  .ingredient-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .ingredient-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 5px;
-  }
-  
-  .ingredient-item input[type="number"] {
-    width: 60px;
-  }
-  
-  .grocery-list {
-    list-style-type: none;
-    padding: 0;
-    margin-top: 20px;
-  }
-  
-  .grocery-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 5px;
-  }
-  
-  .grocery-item input[type="number"] {
-    width: 60px;
-  }
-  
-  .submit-button {
-    margin-top: 10px;
-  }
-  
-  .recipe-list {
-    list-style-type: none;
-    padding: 0;
-    margin-top: 20px;
-  }
-  
-  .recipe-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  .recipe-item img {
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
-  }
-  
-  .recipe-item a {
-    color: #336633;
-    text-decoration: none;
-  }
-   */
-
 body {
-    background-color: #f0f0f0;
+    background-color: #b0c6b2;
     font-family: Arial, sans-serif;
-  }
-  
-  h1 {
-    color: #336633;
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  .container {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    max-width: 1200px;
-    margin: 0 auto;
+    background-color: #1a4314;
     padding: 20px;
-  }
-  
-  .column {
-    flex: 1;
-    margin-right: 20px;
+    margin: 20px;
+    border-radius: 8px;
+    
+}
+
+.column {
+    width: 45%;
     padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-  }
-  
-  .column h2 {
-    color: #336633;
-    margin-bottom: 10px;
-  }
-  
-  .ingredient-form {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-  
-  .ingredient-form label {
-    color: #336633;
-    font-weight: bold;
-    line-height: 30px;
-  }
-  
-  .ingredient-form input[type="text"],
-  .ingredient-form input[type="number"] {
+    border-radius: 8px;
+    background-color: #3c763d; /* Dark green */
+}
+
+.column:first-child {
+    margin-right: 10px;
+}
+
+h1{
+    margin-top: 30px;
+    text-align: center;
+    color:#ffffff
+}
+
+h2 {
+    color: #ffffff;
+}
+
+#recipeheader{
+    margin-top: 50px;
+    text-align: center;
+}
+
+#ingredientInput,
+#quantityInput {
+    margin-right: 10px;
     padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    width: 200px;
-  }
-  
-  .ingredient-form button {
-    padding: 5px 10px;
-    background-color: #336633;
-    color: #fff;
+    border-radius: 4px;
+    border: 1px solid #cccccc;
+}
+
+#ingredientInput:focus,
+#quantityInput:focus {
+    outline: none;
+    border-color: #8cd98c;
+}
+
+button {
+    padding: 8px 15px;
+    border-radius: 4px;
     border: none;
-    border-radius: 3px;
+    background-color: #8cd98c;
+    color: #ffffff;
     cursor: pointer;
-  }
-  
-  .ingredient-list {
+}
+
+button:hover {
+    background-color: #6ebc6e;
+}
+
+.grocery-list-item input {
+    width: 50px;
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #cccccc;
+}
+
+.grocery-list-item input:focus {
+    outline: none;
+    border-color: #8cd98c;
+}
+
+.recipe-list {
     list-style-type: none;
     padding: 0;
-  }
-  
-  .ingredient-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 5px;
-  }
-  
-  .ingredient-item input[type="number"] {
-    width: 60px;
-  }
-  
-  .grocery-list {
-    list-style-type: none;
-    padding: 0;
-    margin-top: 20px;
-  }
-  
-  .grocery-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 5px;
-  }
-  
-  .grocery-item input[type="number"] {
-    width: 60px;
-  }
-  
-  .submit-button {
-    margin-top: 10px;
-  }
-  
-  .recipe-list {
-    list-style-type: none;
-    padding: 0;
-    margin-top: 20px;
-  }
-  
-  .recipe-item {
+    margin-top: 30px;
+}
+
+.recipe-list-item {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-  }
-  
-  .recipe-item img {
+    background-color: #ffffff;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.recipe-list-item img {
     width: 50px;
     height: 50px;
     margin-right: 10px;
-  }
-  
-  .recipe-item a {
-    color: #336633;
+}
+
+.recipe-list-item a {
+    color: #333333;
     text-decoration: none;
-  }
-  
+}
+
+.recipe-list-item a:hover {
+    color: #8cd98c;
+}
+
+.grocery-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 30px;
+}
+
+.grocery-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    background-color: #daf0da; /* Light green */
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.grocery-list-item span {
+    flex-grow: 1;
+    color: #333333;
+}
+
+.grocery-list-item button {
+    padding: 5px 10px;
+    background-color: #e06666;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.grocery-list-item button:hover {
+    background-color: #c15252;
+}
