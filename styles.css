@@ -29,9 +29,13 @@ body {
 }
 
 h1{
+    font-family: Brush Script MT, Brush Script Std, cursive;
+    font-size: 70px;
     margin-top: 30px;
+    margin-bottom: 20px;
     text-align: center;
     color:#ffffff
+    
 }
 
 h2 {
@@ -41,6 +45,7 @@ h2 {
 #recipeheader{
     margin-top: 50px;
     text-align: center;
+    font-family: Courier New, monospace;
 }
 
 #ingredientInput,
@@ -145,4 +150,8 @@ button:hover {
 
 .grocery-list-item button:hover {
     background-color: #c15252;
+}
+
+.words {
+    color: #ffffff;
 }
