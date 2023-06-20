@@ -12,21 +12,21 @@ class iRecipe {
       let connection = url.openConnection();
       connection.setRequestMethod('GET');
       let responseCode = connection.getResponseCode();
-      if (responseCode === HttpURLConnection.HTTP_OK) {
+      if (responseCode === 200) {
         let reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         let line = null;
-        let response = new StringBuilder();
+        let response = '';
         while ((line = reader.readLine()) !== null) {
-          response.append(line);
+          response += line;
         }
         reader.close();
-        console.log(response.toString());
+        console.log(response);
       } else {
         console.log('Error: ' + responseCode);
       }
       connection.disconnect();
     } catch (e) {
-      e.printStackTrace();
+      console.error(e);
     }
   }
 
@@ -36,6 +36,8 @@ class iRecipe {
     return input;
   }
 }
+
+let groceryList = [];
 
 function saveGroceryList() {
   localStorage.setItem('groceryList', JSON.stringify(groceryList));
@@ -52,3 +54,60 @@ function loadGroceryList() {
 // Add the following code at the end of the script section:
 window.addEventListener('load', loadGroceryList);
 window.addEventListener('beforeunload', saveGroceryList);
+
+function addToGroceryList() {
+  let ingredientInput = document.getElementById("ingredientInput").value;
+  let quantityInput = document.getElementById("quantityInput").value;
+
+  let groceryItem = {
+    ingredient: ingredientInput,
+    quantity: quantityInput
+  };
+
+  groceryList.push(groceryItem);
+
+  updateGroceryList();
+  saveGroceryList();
+  clearInputs();
+}
+
+function updateGroceryList() {
+  let groceryListElement = document.getElementById("groceryList");
+  groceryListElement.innerHTML = "";
+
+  groceryList.forEach((groceryItem, index) => {
+    let groceryListItem = document.createElement("li");
+    groceryListItem.className = "grocery-list-item";
+
+    let itemText = document.createElement("span");
+    itemText.textContent = groceryItem.ingredient;
+
+    let quantityInput = document.createElement("input");
+    quantityInput.type = "number";
+    quantityInput.value = groceryItem.quantity;
+    quantityInput.oninput = function (event) {
+      let updatedQuantity = event.target.value;
+      groceryList[index].quantity = updatedQuantity;
+      saveGroceryList();
+    };
+
+    let deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.onclick = function () {
+      groceryList.splice(index, 1);
+      updateGroceryList();
+      saveGroceryList();
+    };
+
+    groceryListItem.appendChild(itemText);
+    groceryListItem.appendChild(quantityInput);
+    groceryListItem.appendChild(deleteButton);
+
+    groceryListElement.appendChild(groceryListItem);
+  });
+}
+
+function clearInputs() {
+  document.getElementById("ingredientInput").value = "";
+  document.getElementById("quantityInput").value = "";
+}
